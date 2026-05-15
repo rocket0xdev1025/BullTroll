@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bull Troll | $BROLL</title>
+<link rel="icon" type="image/x-icon" href="logo.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700;900&family=Pacifico&display=swap" rel="stylesheet">
+<script>
+  window.history.scrollRestoration = "manual";
+
+  if (window.location.hash) {
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+  }
+
+  window.scrollTo(0, 0);
+</script>
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: rgba(255, 255, 255, 0.055);
+      --panel-strong: rgba(255, 255, 255, 0.095);
+      --line: rgba(255, 255, 255, 0.18);
+      --text: #f7f7f0;
+      --muted: #b8b8ad;
+      --gold: #b69a5b;
+      --gold-2: #e1c77a;
+      --white: #ffffff;
+      --black: #000000;
+      --green: #7dff4d;
+      --danger: #ff4d4d;
+      --shadow: 0 24px 90px rgba(0, 0, 0, 0.45);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+  scroll-behavior: auto;
+  overflow-anchor: none;
+}
+
+
+    body {
+      font-family: Inter, sans-serif;
+      background:
+        radial-gradient(circle at 15% 5%, rgba(182, 154, 91, 0.18), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.08), transparent 25%),
+        linear-gradient(180deg, #050505 0%, #0b0b0a 48%, #030303 100%);
+      color: var(--text);
+      overflow-x: hidden;
+      overflow-anchor: none;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      background-image:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at center, black, transparent 80%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: .13;
+      background-image:
+        radial-gradient(circle at 10% 20%, white 0 1px, transparent 1px),
+        radial-gradient(circle at 80% 10%, white 0 1px, transparent 1px),
+        radial-gradient(circle at 50% 80%, white 0 1px, transparent 1px),
+        radial-gradient(circle at 70% 60%, white 0 1px, transparent 1px);
+      background-size: 180px 180px;
+      animation: grainMove 10s linear infinite;
+    }
+
+    @keyframes grainMove {
+      from { transform: translate3d(0,0,0); }
+      to { transform: translate3d(-80px,40px,0); }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      width: min(1440px, 100%);
+      margin: 0 auto;
+      border-left: 1px solid rgba(255,255,255,.08);
+      border-right: 1px solid rgba(255,255,255,.08);
+      min-height: 100vh;
+    }
+
+    .section {
+      padding: 76px clamp(18px, 4vw, 72px);
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(18px, 4vw, 72px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+       font-family: "Genty", Pacifico, cursive;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1;
+      text-shadow: 0 0 22px rgba(255,255,255,.16);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 34px;
+      align-items: center;
+      font-weight: 900;
+      font-size: 14px;
+      text-transform: uppercase;
+      font-style: italic;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: .25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 2px;
+      background: var(--gold-2);
+      transition: .25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-2);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .icon-btn,
+    .hamburger {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: rgba(255,255,255,.04);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: .25s ease;
+    }
+
+    .icon-btn:hover,
+    .hamburger:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold-2);
+      box-shadow: 0 0 28px rgba(182,154,91,.22);
+    }
+
+    .buy-mini {
+      padding: 16px 28px;
+      border-radius: 13px;
+      background: var(--white);
+      color: var(--black);
+      font-weight: 950;
+      font-style: italic;
+      text-transform: uppercase;
+      border: 0;
+      cursor: pointer;
+      box-shadow: inset 0 -4px 0 rgba(0,0,0,.15);
+      transition: .25s ease;
+    }
+
+    .buy-mini:hover {
+      transform: translateY(-3px) rotate(-1deg);
+      background: var(--gold-2);
+    }
+
+    .hamburger {
+      display: none;
+    }
+
+    .hero {
+      min-height: calc(100vh - 82px);
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      align-items: center;
+      gap: 42px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.88), rgba(0,0,0,.25)),
+        radial-gradient(circle at 72% 42%, rgba(182,154,91,.22), transparent 36%);
+    }
+
+    .hero::before {
+      content: "BULL";
+      position: absolute;
+      right: 5vw;
+      top: 9vw;
+      font-family: Archivo Black, sans-serif;
+      font-size: clamp(90px, 15vw, 210px);
+      font-style: italic;
+      color: rgba(182,154,91,.12);
+      transform: rotate(10deg);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "TROLL";
+      position: absolute;
+      right: 2vw;
+      bottom: 7vw;
+      font-family: Archivo Black, sans-serif;
+      font-size: clamp(78px, 13vw, 180px);
+      font-style: italic;
+      color: rgba(255,255,255,.07);
+      transform: rotate(-14deg);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow span {
+      color: var(--gold-2);
+    }
+
+    .hero-title {
+      font-family: Pacifico, cursive;
+      font-size: clamp(64px, 9vw, 136px);
+      line-height: .9;
+      letter-spacing: -3px;
+      margin-bottom: 18px;
+      text-shadow: 0 18px 45px rgba(0,0,0,.6);
+    }
+
+    .symbol-brush {
+      width: fit-content;
+      margin: 18px 0 28px;
+      padding: 12px 54px;
+      background: var(--white);
+      color: var(--black);
+      font-family: Archivo Black, sans-serif;
+      font-size: clamp(38px, 5vw, 72px);
+      font-style: italic;
+      transform: rotate(-2deg);
+      box-shadow:
+        12px 12px 0 rgba(182,154,91,.48),
+        0 20px 50px rgba(0,0,0,.32);
+      clip-path: polygon(3% 14%, 100% 0, 95% 100%, 0 84%);
+    }
+
+    .tagline {
+      font-family: Archivo Black, sans-serif;
+      text-transform: uppercase;
+      font-style: italic;
+      font-size: clamp(24px, 3vw, 42px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .tagline span {
+      color: var(--gold-2);
+    }
+
+    .hero-copy {
+      max-width: 560px;
+      color: #e8e8df;
+      font-size: 18px;
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      min-height: 58px;
+      padding: 0 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 950;
+      font-style: italic;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: .25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent, rgba(255,255,255,.45), transparent);
+      transform: translateX(-120%);
+      transition: .45s ease;
+    }
+
+    .btn:hover::before {
+      transform: translateX(120%);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+    }
+
+    .btn-light {
+      background: var(--white);
+      color: var(--black);
+      box-shadow: inset 0 -5px 0 rgba(0,0,0,.16);
+    }
+
+    .btn-dark {
+      background: rgba(255,255,255,.035);
+      color: var(--white);
+    }
+
+    .contract-card {
+      max-width: 560px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.055);
+      border-radius: 14px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .contract-label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .contract-value {
+      font-family: monospace;
+      color: var(--white);
+      word-break: break-all;
+      font-size: 14px;
+    }
+
+    .copy-btn {
+      height: 48px;
+      padding: 0 18px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.45);
+      color: var(--white);
+      font-weight: 900;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: .25s ease;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--gold-2);
+      color: var(--gold-2);
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      background: var(--white);
+      color: var(--black);
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-weight: 900;
+      z-index: 999;
+      transform: translateY(30px);
+      opacity: 0;
+      transition: .28s ease;
+      box-shadow: 0 18px 50px rgba(0,0,0,.4);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 610px;
+      display: grid;
+      place-items: center;
+      z-index: 2;
+    }
+
+    .hero-art::before {
+      content: "";
+      position: absolute;
+      width: 82%;
+      aspect-ratio: 1;
+      background:
+        radial-gradient(circle, rgba(255,255,255,.13), transparent 58%),
+        radial-gradient(circle, rgba(182,154,91,.22), transparent 70%);
+      filter: blur(10px);
+      animation: pulse 3.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(.94); opacity: .7; }
+      50% { transform: scale(1.04); opacity: 1; }
+    }
+
+    .mascot-wrap {
+      position: relative;
+      width: min(660px, 100%);
+      animation: floaty 5s ease-in-out infinite;
+      filter:
+        drop-shadow(0 24px 0 rgba(0,0,0,.45))
+        drop-shadow(0 0 40px rgba(255,255,255,.14));
+    }
+
+    @keyframes floaty {
+      0%,100% { transform: translateY(0) rotate(-1.5deg); }
+      50% { transform: translateY(-18px) rotate(1deg); }
+    }
+
+    .mascot-img {
+      width: 100%;
+      background: white;
+      border-radius: 50%;
+      padding: 12px;
+      mix-blend-mode: normal;
+      filter: contrast(1.08);
+      clip-path: circle(48% at 50% 50%);
+    }
+
+    .splatter {
+      position: absolute;
+      inset: auto 2% 5% auto;
+      width: 72%;
+      height: 34%;
+      background: var(--white);
+      opacity: .95;
+      clip-path: polygon(0 65%, 18% 35%, 27% 54%, 40% 16%, 53% 58%, 68% 30%, 100% 44%, 72% 72%, 41% 68%, 12% 100%);
+      z-index: -1;
+      transform: rotate(-8deg);
+    }
+
+    .chart-layout {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(0,0,0,.35);
+      box-shadow: var(--shadow);
+    }
+
+    .chart-side {
+      padding: 46px 28px;
+      border-right: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 20% 30%, rgba(182,154,91,.14), transparent 36%),
+        rgba(255,255,255,.035);
+    }
+
+    .section-title {
+      font-family: Archivo Black, sans-serif;
+      font-size: clamp(38px, 5vw, 64px);
+      text-transform: uppercase;
+      font-style: italic;
+      line-height: .95;
+      text-align: center;
+    }
+
+    .chart-side .section-title {
+      text-align: left;
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .gold-text {
+      color: var(--gold-2);
+    }
+
+    .arrow-note {
+      font-size: 64px;
+      line-height: 1;
+      margin: 18px 0;
+      transform: rotate(12deg);
+    }
+
+    .pair-box {
+      margin-top: 34px;
+      padding-top: 26px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      display: none !important;
+    }
+
+    .mini-label {
+      color: var(--muted);
+      font-size: 13px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .pair-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--white);
+      font-weight: 800;
+      word-break: break-all;
+    }
+
+    .dex-frame {
+      min-height: 520px;
+      width: 100%;
+      border: 0;
+      display: block;
+      background: #0a0d11;
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.08fr;
+      gap: 24px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025)),
+        rgba(0,0,0,.35);
+      box-shadow: var(--shadow);
+      padding: clamp(24px, 4vw, 46px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, rgba(255,255,255,.16), transparent 40%, rgba(182,154,91,.18));
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    .brush-title {
+      position: relative;
+      z-index: 1;
+      width: fit-content;
+      margin: 0 auto 38px;
+      padding: 9px 28px;
+      background: var(--white);
+      color: var(--black);
+      font-family: Archivo Black, sans-serif;
+      text-transform: uppercase;
+      font-size: clamp(24px, 3vw, 42px);
+      font-style: italic;
+      transform: rotate(-2deg);
+      clip-path: polygon(4% 10%, 100% 0, 95% 100%, 0 88%);
+    }
+
+    .token-list {
+      display: grid;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .token-item {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 16px;
+      background: rgba(0,0,0,.32);
+      transition: .25s ease;
+    }
+
+    .token-item:hover {
+      transform: translateX(8px);
+      border-color: var(--gold-2);
+    }
+
+    .percent {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--gold-2);
+      color: var(--gold-2);
+      font-family: Archivo Black, sans-serif;
+      font-size: 18px;
+    }
+
+    .token-item h3 {
+      text-transform: uppercase;
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+
+    .token-item p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .supply-box {
+      position: relative;
+      z-index: 1;
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: .02em;
+    }
+
+    .buy-steps {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 20px;
+      max-width: 560px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--white);
+      color: var(--black);
+      font-family: Archivo Black, sans-serif;
+      font-size: 22px;
+      transform: rotate(-7deg);
+    }
+
+    .step h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .phone-art {
+      position: absolute;
+      right: 28px;
+      bottom: 20px;
+      width: min(260px, 38%);
+      aspect-ratio: 9/16;
+      border: 5px solid white;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255,255,255,.2), transparent 30%),
+        #070707;
+      transform: rotate(-9deg);
+      box-shadow: 20px 24px 0 rgba(0,0,0,.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .phone-art img {
+      width: 62%;
+      filter: invert(1) contrast(1.2);
+      border-radius: 50%;
+    }
+
+    .phone-art strong {
+      font-family: Archivo Black, sans-serif;
+      font-size: 30px;
+      color: white;
+    }
+
+    .phone-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .phone-buttons span {
+      border: 1px solid white;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .faq-wrap {
+      max-width: 1020px;
+      margin: 36px auto 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 28px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.38);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: .25s ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--gold-2);
+    }
+
+    .faq-q {
+      width: 100%;
+      border: 0;
+      color: var(--white);
+      background: transparent;
+      min-height: 58px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 800;
+      text-align: left;
+    }
+
+    .faq-plus {
+      font-size: 26px;
+      transition: .25s ease;
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      color: var(--muted);
+      line-height: 1.6;
+      padding: 0 18px;
+      transition: .28s ease;
+    }
+
+    .faq-item.active .faq-a {
+      max-height: 180px;
+      padding: 0 18px 18px;
+    }
+
+    .faq-item.active .faq-plus {
+      transform: rotate(45deg);
+      color: var(--gold-2);
+    }
+
+    .footer {
+      padding: 46px clamp(18px, 4vw, 72px);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+      border-bottom: 0;
+    }
+
+    .footer-logo {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .footer-logo img {
+      width: 92px;
+      height: 92px;
+      object-fit: cover;
+      border-radius: 50%;
+      background: white;
+    }
+
+    .footer-logo h2 {
+      font-family: "Genty", Pacifico, cursive;
+      font-size: 40px;
+      line-height: .9;
+    }
+
+    .footer-logo span {
+      display: block;
+      margin-top: 8px;
+      font-family: Archivo Black, sans-serif;
+      color: var(--gold-2);
+      font-size: 28px;
+    }
+
+    .footer-center {
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.7;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      padding: 0 28px;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .socials a {
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      transition: .25s ease;
+    }
+
+    .socials a:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold-2);
+      color: var(--gold-2);
+    }
+
+    .footer-right {
+      font-family: Archivo Black, sans-serif;
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.15;
+      color: #ddd;
+      text-transform: uppercase;
+    }
+
+    .disclaimer {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+      padding: 18px;
+      border-top: 1px solid rgba(255,255,255,.1);
+      background: rgba(0,0,0,.28);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: .75s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    @media (max-width: 1050px) {
+      .nav-links,
+      .nav-actions {
+        display: none;
+      }
+
+      .hamburger {
+        display: grid;
+      }
+
+      .mobile-menu {
+        display: block;
+        position: fixed;
+        top: 82px;
+        left: 12px;
+        right: 12px;
+        z-index: 99;
+        background: rgba(0,0,0,.94);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px;
+        transform: translateY(-20px);
+        opacity: 0;
+        pointer-events: none;
+        transition: .25s ease;
+        backdrop-filter: blur(18px);
+      }
+
+      .mobile-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .mobile-menu a {
+        display: block;
+        padding: 16px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 56px;
+      }
+
+      .hero-art {
+        min-height: auto;
+      }
+
+      .chart-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-side {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .dex-frame {
+        min-height: 480px;
+      }
+
+      .split-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phone-art {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        width: min(280px, 100%);
+        margin: 34px auto 0;
+      }
+
+      .buy-steps {
+        max-width: 100%;
+      }
+
+      .footer {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-logo {
+        justify-content: center;
+      }
+
+      .footer-center {
+        border: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        padding: 28px 0;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .section {
+        padding: 54px 16px;
+      }
+
+      .nav {
+        padding: 0 16px;
+      }
+
+      .brand {
+        font-size: 30px;
+      }
+
+      .hero-title {
+        font-size: 64px;
+        letter-spacing: -1px;
+      }
+
+      .symbol-brush {
+        font-size: 38px;
+        padding: 10px 34px;
+      }
+
+      .tagline {
+        font-size: 27px;
+      }
+
+      .hero-copy {
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .contract-card {
+        grid-template-columns: 1fr;
+      }
+
+      .copy-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .mascot-img {
+        padding: 7px;
+      }
+
+      .dex-frame {
+        min-height: 420px;
+      }
+
+      .faq-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .token-item {
+        grid-template-columns: 58px 1fr;
+      }
+
+      .percent {
+        width: 52px;
+        height: 52px;
+        font-size: 15px;
+      }
+
+      .footer-logo {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero-title {
+        font-size: 52px;
+      }
+
+      .symbol-brush {
+        font-size: 32px;
+      }
+
+      .section-title {
+        font-size: 36px;
+      }
+
+      .brush-title {
+        font-size: 24px;
+      }
+
+      .dex-frame {
+        min-height: 360px;
+      }
+    }
+
+
+
+    .custom-social img,
+.socials img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.custom-social:hover img,
+.socials a:hover img {
+  transform: scale(1.15) rotate(-6deg);
+  filter: drop-shadow(0 0 10px rgba(225, 199, 122, 0.8));
+}
+
+.socials a {
+  overflow: hidden;
+}
+
+@media (max-width: 720px) {
+  .custom-social img,
+  .socials img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+
+.chart-loader {
+  min-height: 520px;
+  width: 100%;
+  background:
+    radial-gradient(circle at center, rgba(225,199,122,.15), transparent 40%),
+    #0a0d11;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 30px;
+}
+
+.chart-loader h3 {
+  font-family: Archivo Black, sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  text-transform: uppercase;
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.chart-loader p {
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+
+
+@font-face {
+  font-family: "Genty";
+  src: url("GentyDemo-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.hero-title,
+.brand,
+.footer-logo h2 {
+  font-family: "Genty", Pacifico, cursive;
+  font-weight: normal;
+letter-spacing: 0;
+}
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="nav">
+      <a href="#home" class="brand">Bull Troll</a>
+
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#chart">Chart</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#buy">How To Buy</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="icon-btn custom-social" href="https://pump.fun/coin/3tuQXnrMKyyLJuiuWrYmYmJYzCc2AaUUcBXUHaaQpump" target="_blank" aria-label="Pump">
+  <img src="pf-icon.png" alt="Pumpfun">
+</a>
+
+<a class="icon-btn custom-social" href="https://x.com/BULLTROLL_" target="_blank" aria-label="X Twitter">
+  <img src="x-icon.png" alt="X Twitter">
+</a>
+        <a class="buy-mini" href="https://pump.fun/coin/3tuQXnrMKyyLJuiuWrYmYmJYzCc2AaUUcBXUHaaQpump" target="_blank" rel="noopener">Buy $BROLL</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Open Menu">☰</button>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#home">Home</a>
+      <a href="#chart">Chart</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#buy">How To Buy</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://pump.fun/coin/3tuQXnrMKyyLJuiuWrYmYmJYzCc2AaUUcBXUHaaQpump" target="_blank" rel="noopener">Buy $BROLL</a>
+    </div>
+
+    <main>
+      <section class="section hero" id="home">
+        <div class="hero-content reveal">
+          <div class="eyebrow">Welcome to <span>Bull Troll</span></div>
+
+          <h1 class="hero-title">Bull Troll</h1>
+
+          <div class="symbol-brush">$BROLL</div>
+
+          <h2 class="tagline">You just have to bullieve! <span>Are you mad bro?</span></h2>
+
+          <p class="hero-copy">
+            
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-light" href="https://pump.fun/coin/3tuQXnrMKyyLJuiuWrYmYmJYzCc2AaUUcBXUHaaQpump">Buy $BROLL</a>
+            <a class="btn btn-dark" href="https://x.com/BULLTROLL_">Join Community</a>
+          </div>
+
+          <div class="contract-card">
+            <div>
+              <div class="contract-label">Contract Address (Solana)</div>
+              <div class="contract-value" id="contractText">3tuQXnrMKyyLJuiuWrYmYmJYzCc2AaUUcBXUHaaQpump</div>
+            </div>
+            <button class="copy-btn" id="copyBtn">
+              <span>⧉</span>
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-art reveal">
+          <div class="splatter"></div>
+
+          <!-- Replace this src with your transparent Bull Troll mascot PNG -->
+          <div class="mascot-wrap">
+            <img
+              class="mascot-img"
+              src="logo.jpg"
+              alt="Bull Troll mascot"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="chart">
+        <div class="chart-layout reveal">
+          <aside class="chart-side">
+            <h2 class="section-title">Live Chart</h2>
+            <p class="gold-text" style="font-weight:900; text-transform:uppercase;">• On Dexscreener</p>
+            <div class="arrow-note">↪</div>
+
+            <a class="btn btn-dark" id="dexLink" href="https://dexscreener.com/solana/gjc66eedntrbbdrcbazkcapgjao7tkklccxjghhevlmd" target="_blank" rel="noopener">
+              View on Dexscreener ↗
+            </a>
+
+            <div class="pair-box">
+              
+              <div class="pair-row">
+                <span id="pairText">BROLL/SOL</span>
+                <button class="copy-btn" id="copyPairBtn" style="height:40px; padding:0 12px;">⧉</button>
+              </div>
+            </div>
+          </aside>
+
+        <div class="chart-loader" id="chartLoader">
+  <h3>Live Dexscreener Chart</h3>
+  <p>Click below to load the real live chart.</p>
+  <button class="btn btn-light" id="loadChartBtn" type="button">Load Live Chart</button>
+</div>
+
+<iframe
+  id="dexFrame"
+  class="dex-frame"
+  title="Dexscreener Live Chart"
+  loading="lazy"
+  tabindex="-1"
+  src="about:blank"
+  style="display:none;">
+</iframe>
+        </div>
+      </section>
+
+      <section class="section split-grid" id="tokenomics">
+       <div class="panel reveal">
+  <h2 class="brush-title">Tokenomics</h2>
+
+  <div class="token-list">
+    <div class="token-item">
+      <div class="percent">1B</div>
+      <div>
+        <h3>Total Supply</h3>
+        <p>1,000,000,000 $BROLL total supply.</p>
+      </div>
+    </div>
+
+    <div class="token-item">
+      <div class="percent">0%</div>
+      <div>
+        <h3>Tax</h3>
+        <p>Zero buy tax. Zero sell tax. Pure meme chaos.</p>
+      </div>
+    </div>
+
+    <div class="token-item">
+      <div class="percent">100%</div>
+      <div>
+        <h3>Community Driven</h3>
+        <p>No team allocation. No private sale. No insider advantage.</p>
+      </div>
+    </div>
+
+    <div class="token-item">
+      <div class="percent">LP</div>
+      <div>
+        <h3>Liquidity</h3>
+        <p>Burned Forever !.</p>
+      </div>
+    </div>
+
+    <div class="token-item">
+      <div class="percent">SOL</div>
+      <div>
+        <h3>Network</h3>
+        <p>Built for the Solana meme coin battlefield.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="supply-box">
+    100% Community Driven • No Team Tokens • No Private Sale
+  </div>
+</div>
+
+        <div class="panel reveal" id="buy">
+          <h2 class="brush-title">How To Buy $BROLL</h2>
+
+          <div class="buy-steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div>
+                <h3>Get SOL</h3>
+                <p>Buy SOL on any exchange and send it to your Solana wallet.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">2</div>
+              <div>
+                <h3>Go to Pumpfun or Dexscreener</h3>
+                <p>Connect your wallet and open your favorite Solana DEX.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">3</div>
+              <div>
+                <h3>Swap SOL to $BROLL</h3>
+                <p>Paste the official $BROLL contract and swap.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">4</div>
+              <div>
+                <h3>Hold & Troll</h3>
+                <p>Sit back, relax, and let the bulls troll the bears.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone-art">
+            <img src="logo.jpg" alt="Bull Troll phone icon">
+            <strong>$BROLL</strong>
+            <div class="phone-buttons">
+              <span>BUY</span>
+              <span>SWAP</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <h2 class="section-title reveal">FAQ</h2>
+
+        <div class="faq-wrap reveal">
+          <div class="faq-item">
+            <button class="faq-q">
+              What is Bull Troll ($BROLL)?
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-a">
+              Bull Troll is a Solana meme coin powered by community energy, bullish memes, and troll culture.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">
+              Is $BROLL a legit project?
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-a">
+              Always verify the official contract, links, and chart before trading. This website uses a real Dexscreener embed.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">
+              Is the liquidity burned?
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-a">
+             Yes. It’s SAFU it launched on the Pump.fun launchpad.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">
+              How can I track $BROLL price?
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-a">
+              Use the live Dexscreener chart section after adding your real pair address.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">
+              What blockchain is $BROLL on?
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-a">
+              $BROLL is designed for the Solana network.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">
+              Where can I buy $BROLL?
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-a">
+              After launch, buy through the official Dexscreener/Pumpswap/Jupiter links using the correct contract.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="section footer" id="footer">
+      <div class="footer-logo reveal">
+        <img src="logo.jpg" alt="Bull Troll logo">
+        <div>
+          <h2>Bull Troll</h2>
+          <span>$BROLL</span>
+        </div>
+      </div>
+
+      <div class="footer-center reveal">
+        <p>© 2026 Bull Troll. All Rights Reserved.</p>
+        <p>This is a meme coin. Not financial advice.</p>
+
+        <div class="socials">
+          <a class="icon-btn custom-social" href="https://pump.fun/coin/3tuQXnrMKyyLJuiuWrYmYmJYzCc2AaUUcBXUHaaQpump" target="_blank" aria-label="Pump">
+  <img src="pf-icon.png" alt="Pumpfun">
+</a>
+
+<a class="icon-btn custom-social" href="https://x.com/BULLTROLL_" target="_blank" aria-label="X Twitter">
+  <img src="x-icon.png" alt="X Twitter">
+</a>
+          
+        </div>
+      </div>
+
+      <div class="footer-right reveal">
+        Powered by community.<br>
+        Fueled by memes.
+      </div>
+    </footer>
+
+    <div class="disclaimer">
+      Disclaimer: $BROLL is a meme coin with no intrinsic value or expectation of financial return. Cryptocurrency is risky. DYOR.
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copied!</div>
+
+  <script>
+    /***********************
+     * EDIT THESE VALUES
+     ***********************/
+    const CONTRACT_ADDRESS = "3tuQXnrMKyyLJuiuWrYmYmJYzCc2AaUUcBXUHaaQpump";
+    const DEX_CHAIN = "solana";
+    const DEX_PAIR_ADDRESS = "FFczKAeHxCAtmNk2bY5ttB5b6A4qp5TmeU8ffBGVBZnV";
+
+    const contractText = document.getElementById("contractText");
+    const copyBtn = document.getElementById("copyBtn");
+    const copyPairBtn = document.getElementById("copyPairBtn");
+    const pairText = document.getElementById("pairText");
+    const toast = document.getElementById("toast");
+    const dexFrame = document.getElementById("dexFrame");
+    const dexLink = document.getElementById("dexLink");
+
+    contractText.textContent = CONTRACT_ADDRESS;
+    pairText.textContent = DEX_PAIR_ADDRESS;
+
+    const dexUrl = `https://dexscreener.com/${DEX_CHAIN}/${DEX_PAIR_ADDRESS}?embed=1&theme=dark&trades=0&info=1`;
+    const dexPage = `https://dexscreener.com/${DEX_CHAIN}/${DEX_PAIR_ADDRESS}`;
+
+    dexLink.href = dexPage;
+
+dexLink.href = dexPage;
+
+function forceTop() {
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+history.replaceState(null, "", window.location.pathname + window.location.search);
+
+window.addEventListener("DOMContentLoaded", forceTop);
+window.addEventListener("load", forceTop);
+window.addEventListener("pageshow", forceTop);
+
+const loadChartBtn = document.getElementById("loadChartBtn");
+const chartLoader = document.getElementById("chartLoader");
+
+loadChartBtn.addEventListener("click", () => {
+  chartLoader.style.display = "none";
+  dexFrame.style.display = "block";
+  dexFrame.src = dexUrl;
+});
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1600);
+    }
+
+    async function copyText(value, successMessage) {
+      try {
+        await navigator.clipboard.writeText(value);
+        showToast(successMessage);
+      } catch (error) {
+        const temp = document.createElement("textarea");
+        temp.value = value;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        temp.remove();
+        showToast(successMessage);
+      }
+    }
+
+    copyBtn.addEventListener("click", () => {
+      copyText(CONTRACT_ADDRESS, "Contract copied!");
+    });
+
+    copyPairBtn.addEventListener("click", () => {
+      copyText(DEX_PAIR_ADDRESS, "Pair copied!");
+    });
+
+    const hamburger = document.getElementById("hamburger");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    hamburger.addEventListener("click", () => {
+      mobileMenu.classList.toggle("active");
+      hamburger.textContent = mobileMenu.classList.contains("active") ? "×" : "☰";
+    });
+
+    document.querySelectorAll(".mobile-menu a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+        hamburger.textContent = "☰";
+      });
+    });
+
+    document.querySelectorAll(".faq-q").forEach(button => {
+      button.addEventListener("click", () => {
+        const item = button.closest(".faq-item");
+        item.classList.toggle("active");
+      });
+    });
+
+    const revealItems = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, {
+      threshold: 0.16
+    });
+
+    revealItems.forEach(item => observer.observe(item));
+
+    
+  </script>
+</body>
+</html>
